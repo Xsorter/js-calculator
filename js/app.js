@@ -28,7 +28,9 @@ console.log(arrButtons);
 
 for(let i=0; i<arrButtons.length; i++){
     arrButtons[i].addEventListener('click', function(){
-        data.resultDOM.value += arrButtons[i].value.trim()
+        if(arrButtons[i].value.trim() !== "="){
+            data.resultDOM.value += arrButtons[i].value.trim()
+        }
         console.log(arrButtons[i].value)
     })
 }
