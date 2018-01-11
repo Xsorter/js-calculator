@@ -35,3 +35,38 @@ for(let i=0; i<arrButtons.length; i++){
     })
 }
 
+
+
+//try some kind of tokens here to parse values
+function parseCalculation(val) {
+    let signs = ["*", "+"];         // signs in the order in which they should be evaluated
+    let funcs = [multiply, add];                 // the functions associated with the signs
+    let tokens = str.split(/\b/);      // split the string into "tokens" (numbers or signs)
+
+    //run through two-dimentional array
+    for (let round = 0; round < signs.length; round++) {          // do this for every sign
+        console.log("tokens at this point: " + tokens.join(" "));
+        for (let place = 0; place < tokens.length; place++) {    // do this for every token
+            if (tokens[place] == signs[round]) {                         // a sign is found
+                let a = parseInt(tokens[place - 1]);    // convert previous token to number
+                let b = parseInt(tokens[place + 1]);        // convert next token to number
+                let result = funcs[round](a, b);           
+                console.log("calc: " + a + signs[round] + b + "=" + result);
+                tokens[place - 1] = result.toString();      // store the result as a string
+                tokens.splice(place--, 2);  // delete obsolete tokens and back up one place
+            }
+        }
+    }
+
+    return tokens[0];  
+
+    function multiply(x, y) {                  
+        return x * y;
+    }
+    function add(x, y) {                       
+        return x + y;
+    }
+}
+
+let str = "3*7+8*9";
+console.log("result: " + str + " = " + parseCalculation(str));
