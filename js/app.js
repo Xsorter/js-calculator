@@ -43,8 +43,8 @@ for(let i=0; i<arrButtons.length; i++){
 
 //try some kind of tokens here to parse values
 function parseCalculation(val) {
-    let signs = ["*", "+"];         // signs in the order in which they should be evaluated
-    let funcs = [multiply, add];                 // the functions associated with the signs
+    let signs = ["*", "/", "+", "-"];         // signs in the order in which they should be evaluated
+    let funcs = [multiply, divide, add, substraction];                 // the functions associated with the signs
     let tokens = val.split(/\b/);      // split the string into "tokens" (numbers or signs)
 
     //run through two-dimentional array
@@ -67,11 +67,18 @@ function parseCalculation(val) {
     }
 
     return tokens[0];  
+
     function multiply(x, y) {                  
         return x * y;
     }
     function add(x, y) {                       
         return x + y;
+    }
+    function divide(x, y) {                       
+        return x / y;
+    }
+    function substraction(x, y) {
+        return x - y;
     }
 }
 
